@@ -19,13 +19,14 @@ void setup() {
   // Motor Setup
   pinMode(ENA, OUTPUT); pinMode(IN1, OUTPUT); pinMode(IN2, OUTPUT);
   pinMode(ENB, OUTPUT); pinMode(IN3, OUTPUT); pinMode(IN4, OUTPUT);
-  
+  Serial.begin(9600);
   // IR Sensor Setup
   pinMode(irLeft, INPUT);
   pinMode(irRight, INPUT);
 
   stopMotors();
   delay(2000); // System stabilization delay before execution
+ 
 }
 
 void loop() {
@@ -42,10 +43,12 @@ void loop() {
   else if (leftState == HIGH && rightState == LOW) {
     // Left sensor on black: drifting right, need to correct left
     turnLeft(turnSpeed);
+    Serial.println("High");
   } 
   else if (leftState == LOW && rightState == HIGH) {
     // Right sensor on black: drifting left, need to correct right
     turnRight(turnSpeed);
+    Serial.println("High");
   } 
   else if (leftState == HIGH && rightState == HIGH) {
     // Both sensors on black: intersection or end of line

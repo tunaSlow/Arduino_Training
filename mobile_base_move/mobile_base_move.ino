@@ -16,6 +16,7 @@ const int IN4 = A1; // Direction control 2
 
 // Set a base cruising speed (0-255)
 const int cruiseSpeed = 150; 
+int turnSpeed = 200;
 
 void setup() {
   // Configure all motor control pins as outputs
@@ -31,23 +32,6 @@ void setup() {
   stopMotors();
 }
 
-void loop() {
-  // Simple kinematic testing sequence
-  moveForward(cruiseSpeed);
-  delay(2000);
-  
-  stopMotors();
-  delay(500);
-  
-  turnRight(cruiseSpeed);
-  delay(1000);
-  
-  stopMotors();
-  delay(500);
-}
-
-// --- Kinematic Control Functions ---
-
 void moveForward(int speed) {
   // Set Left Motor forward
   digitalWrite(IN1, HIGH);
@@ -59,6 +43,15 @@ void moveForward(int speed) {
   digitalWrite(IN4, LOW);
   analogWrite(ENB, speed);
 }
+
+void loop() {
+  delay(1500);
+  moveCircle(99, 150);
+}
+
+// --- Kinematic Control Functions ---
+
+
 
 void moveBackward(int speed) {
   // Set Left Motor backward
@@ -105,3 +98,16 @@ void stopMotors() {
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
 }
+
+void moveCircle(int vl, int vr) {
+  // Left Motor backward, Right Motor forward (Point turn)
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, vl);
+  
+  // Set Right Motor backward
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, vr);
+}
+
