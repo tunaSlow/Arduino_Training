@@ -13,7 +13,7 @@ const int irRight = A3;
 
 // Tuning parameters
 const int baseSpeed = 120; // Lower speed recommended for bang-bang line following
-const int turnSpeed = 150; // Speed differential for pivot turns
+const int turnSpeed = 120; // Speed differential for pivot turns
 
 void setup() {
   // Motor Setup

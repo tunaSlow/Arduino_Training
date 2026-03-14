@@ -24,7 +24,7 @@ void setup() {
 
 void loop() {
   int distanceFront = getDistance();
-  Serial.print(distanceFront);
+  Serial.println(distanceFront);
 
   sensorServo.write(90);
   delay(300);
